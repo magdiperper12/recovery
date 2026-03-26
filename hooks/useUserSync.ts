@@ -145,9 +145,12 @@ export const useUserSync = (
   }, [userId]);
 
   const signOut = async () => {
-    if (!hasSupabaseConfig) return;
-    const supabase = createSupabaseBrowserClient();
-    await supabase.auth.signOut();
+    if (hasSupabaseConfig) {
+      const supabase = createSupabaseBrowserClient();
+      await supabase.auth.signOut();
+    }
+    document.cookie = "auth_local=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    sessionStorage.removeItem("remember-session");
     setUserId(null);
     setStatus("idle");
     window.location.href = "/login";

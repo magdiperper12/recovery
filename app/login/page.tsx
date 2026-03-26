@@ -17,7 +17,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
   const canSubmit = useMemo(
-    () => hasSupabaseConfig && identifier.trim().length > 0 && password.trim().length > 0 && !loading,
+    () => identifier.trim().length > 0 && password.trim().length > 0 && !loading,
     [identifier, password, loading]
   );
 
@@ -34,39 +34,43 @@ export default function LoginPage() {
         return;
       }
 
-      const supabase = createSupabaseBrowserClient();
-      let { error: signInError } = await supabase.auth.signInWithPassword({
-        email: FIXED_LOGIN_EMAIL,
-        password: ALLOWED_PASSWORD
-      });
-
-      if (signInError) {
-        const { error: signUpError } = await supabase.auth.signUp({
+      if (hasSupabaseConfig) {
+        const supabase = createSupabaseBrowserClient();
+        let { error: signInError } = await supabase.auth.signInWithPassword({
           email: FIXED_LOGIN_EMAIL,
           password: ALLOWED_PASSWORD
         });
-        if (signUpError) {
+
+        if (signInError) {
+          const { error: signUpError } = await supabase.auth.signUp({
+            email: FIXED_LOGIN_EMAIL,
+            password: ALLOWED_PASSWORD
+          });
+          if (signUpError) {
+            setError(signInError.message);
+            return;
+          }
+          const retry = await supabase.auth.signInWithPassword({
+            email: FIXED_LOGIN_EMAIL,
+            password: ALLOWED_PASSWORD
+          });
+          signInError = retry.error;
+        }
+
+        if (signInError) {
           setError(signInError.message);
           return;
         }
-        const retry = await supabase.auth.signInWithPassword({
-          email: FIXED_LOGIN_EMAIL,
-          password: ALLOWED_PASSWORD
-        });
-        signInError = retry.error;
-      }
-
-      if (signInError) {
-        setError(signInError.message);
-        return;
       }
 
       if (!rememberMe) {
         localStorage.setItem("remember-me", "false");
         sessionStorage.setItem("remember-session", "active");
+        document.cookie = "auth_local=1; path=/; samesite=lax";
       } else {
         localStorage.setItem("remember-me", "true");
         sessionStorage.setItem("remember-session", "active");
+        document.cookie = `auth_local=1; path=/; max-age=${60 * 60 * 24 * 30}; samesite=lax`;
       }
 
       router.replace("/");
@@ -116,7 +120,7 @@ export default function LoginPage() {
         {error && <div className="rounded-lg bg-bad/20 px-3 py-2 text-sm text-bad">{error}</div>}
         {!hasSupabaseConfig && (
           <div className="rounded-lg bg-warn/20 px-3 py-2 text-sm text-warn">
-            Missing Supabase environment variables.
+            Supabase is not configured. Running in local auth mode.
           </div>
         )}
 
