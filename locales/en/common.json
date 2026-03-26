@@ -1,0 +1,173 @@
+{
+  "app": {
+    "title": "Daily Transformation System",
+    "loading": "Loading tracker..."
+  },
+  "meta": {
+    "description": "Arabic-first RTL checklist and transformation operating system."
+  },
+  "stats": {
+    "daySprint": "Phase {sprint} | Day {sprintDay}/{phaseLength}",
+    "recovery": "Recovery Day {recoveryDay}/{days}",
+    "todayProgress": "Today Progress",
+    "cleanStreak": "Clean Streak",
+    "days": "{count} days",
+    "disciplineScore": "Discipline Score",
+    "tasksCompleted": "{completed}/{total} tasks completed"
+  },
+  "categories": {
+    "morning": "Morning Routine",
+    "work": "Work Block",
+    "deepWork": "Deep Work",
+    "growth": "Growth Block",
+    "discipline": "Discipline",
+    "night": "Night Routine"
+  },
+  "taskStatus": {
+    "done": "Done",
+    "pending": "Pending"
+  },
+  "controls": {
+    "title": "Discipline Controls",
+    "relapse": "Relapse happened today",
+    "badDay": "Bad day (honesty button)",
+    "notesPlaceholder": "Daily notes: triggers, wins, corrections..."
+  },
+  "sprint": {
+    "title": "Current Sprint Strategy",
+    "focus": "Focus:",
+    "mainGoal": "Main goal:",
+    "correction": "Mid-sprint correction:",
+    "review": "Day-15 self-review:",
+    "gridTitle": "Phase {sprint} (Day 1-{phaseLength})",
+    "today": "Today: Day {day}",
+    "dayPrefix": "D",
+    "recoveryLabel": "R"
+  },
+  "operatingSystem": {
+    "title": "120-Day Transformation Operating System",
+    "headers": {
+      "sprint": "Sprint",
+      "focus": "Phase Focus",
+      "mainGoal": "Main Goal",
+      "kpis": "KPIs",
+      "mistakes": "Common Mistakes"
+    },
+    "recoveryProtocol": "Recovery protocol: after each 15-day sprint, run 3 active recovery days (walk, mobility, review, sleep debt reset)."
+  },
+  "systems": {
+    "fatLossTitle": "Fat Loss System (90kg -> 75kg)",
+    "fatLossBody": "Calorie deficit 400-600/day, protein 1.8-2.2g/kg target weight, 8k-12k daily steps, strength 4x/week, cardio 3x/week, weekly average weight tracking.",
+    "incomeTitle": "Income Doubling System",
+    "incomeBody": "Daily applications + proposals, weekly portfolio output, networking outreach, fast cash micro-services, long-term productized dev offers.",
+    "footer": "Plan = 7 phases (6x15 days + final 12 days) with {recovery}-day recovery between phases."
+  },
+  "nav": {
+    "title": "Phases & Reference Pages",
+    "phaseLink": "Phase {phase}",
+    "fullOverview": "Full Overview"
+  },
+  "phasePage": {
+    "title": "Phase {phase}",
+    "backHome": "Back Home",
+    "topKpis": "Top KPIs",
+    "nonNegotiables": "Daily Non-Negotiables",
+    "commonMistakes": "Common Mistakes",
+    "successRules": "Success Rules",
+    "referenceChecklist": "Reference Daily Checklist"
+  },
+  "overviewPage": {
+    "title": "Full 120-Day Overview",
+    "subtitle": "Core transformation goals only. No daily phase details in this page.",
+    "backHome": "Back Home",
+    "progress": "Progress",
+    "priority": {
+      "high": "High Priority",
+      "medium": "Medium Priority",
+      "low": "Low Priority"
+    },
+    "goals": {
+      "income": {
+        "icon": "💰",
+        "title": "Increase Monthly Income",
+        "description": "Target monthly income reaches 30,000 EGP through jobs, freelancing, and better conversion.",
+        "priority": "high"
+      },
+      "weight": {
+        "icon": "🏋️",
+        "title": "Weight Loss Goal",
+        "description": "Move from 90kg to 75kg with sustainable fat loss, muscle retention, and disciplined nutrition.",
+        "priority": "high"
+      },
+      "quitAddiction": {
+        "icon": "🧠",
+        "title": "Quit Porn & Masturbation",
+        "description": "Build a clean streak and eliminate relapse triggers through strict rules and replacement habits.",
+        "priority": "high"
+      },
+      "varicocele": {
+        "icon": "🏥",
+        "title": "Varicocele Surgery",
+        "description": "Complete medical consultation and procedure planning to support long-term health and stability.",
+        "priority": "medium"
+      },
+      "backend": {
+        "icon": "🛠️",
+        "title": "Backend Track (Node.js)",
+        "description": "Complete core backend path in Node.js with practical APIs, authentication, and real project delivery.",
+        "priority": "medium"
+      },
+      "frontendSenior": {
+        "icon": "🚀",
+        "title": "Reach Senior Frontend Level",
+        "description": "Advance architecture, performance, and production patterns to reach senior-level frontend capability.",
+        "priority": "high"
+      }
+    }
+  },
+  "language": {
+    "arabic": "Arabic",
+    "english": "English",
+    "switchLabel": "Language"
+  },
+  "tasks": {
+    "wake_6": "Wake up at 6:00 AM",
+    "fajr": "Fajr prayer",
+    "gym": "Gym session",
+    "breakfast": "Healthy breakfast",
+    "work": "Attend work (9:30 AM - 3:00 PM)",
+    "focus": "Focused work (no distractions)",
+    "backend_2h": "Backend study (2h)",
+    "frontend_1h": "Frontend study (1h)",
+    "jobs": "Apply for jobs (LinkedIn / Wuzzuf)",
+    "freelance": "Freelance search (Upwork / Fiverr)",
+    "no_porn": "No porn",
+    "no_masturbation": "No masturbation",
+    "social_limit": "Limit social media",
+    "reflect": "Reflect on the day",
+    "track": "Track progress",
+    "sleep_1130": "Sleep before 11:30 PM"
+  },
+  "motivation": {
+    "low": "Reset now. One focused day rebuilds momentum.",
+    "mid": "Solid effort. Protect tonight and win tomorrow early.",
+    "high": "You are in control. Keep stacking clean days.",
+    "elite": "Elite execution. Stay humble, repeat tomorrow."
+  },
+  "sprints": {
+    "1": {
+      "focus": "Discipline Foundation",
+      "mainGoal": "Complete Sprint 1 with >= 80% execution and zero avoidance behavior.",
+      "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created",
+      "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep",
+      "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.",
+      "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?"
+    },
+    "2": { "focus": "Skill Core Build", "mainGoal": "Complete Sprint 2 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?" },
+    "3": { "focus": "Skill + Portfolio", "mainGoal": "Complete Sprint 3 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?" },
+    "4": { "focus": "Income Activation", "mainGoal": "Complete Sprint 4 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?" },
+    "5": { "focus": "Body Recomposition Push", "mainGoal": "Complete Sprint 5 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?" },
+    "6": { "focus": "Interview + Client Pipeline", "mainGoal": "Complete Sprint 6 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next sprint? | Which skill/income metric improved measurably?" },
+    "7": { "focus": "Stability + Marriage Readiness", "mainGoal": "Complete final Phase 7 with >= 80% execution and zero avoidance behavior.", "kpis": "Daily checklist completion percentage | Streak of clean days | Bodyweight trend (weekly average) | Income generated / opportunities created", "mistakes": "All-or-nothing mindset after one bad day | Late-night phone use causing relapse risk | Applying randomly without tracking conversion | Overtraining with poor sleep", "correction": "If 2 consecutive weak days happen, reduce workload by 20% for 48h, keep non-negotiables, then ramp back up.", "review": "What gave the best results? | What triggered low-output days? | What exact rule must be tightened next cycle? | Which skill/income metric improved measurably?" }
+  }
+}

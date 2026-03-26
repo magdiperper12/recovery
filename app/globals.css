@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background: #0b1220;
+  color: #e2e8f0;
+  font-family: var(--font-latin), system-ui, sans-serif;
+  line-height: 1.65;
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-arabic), var(--font-latin), system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
