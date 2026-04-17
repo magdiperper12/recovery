@@ -57,11 +57,11 @@ export const exportAppData = (state: AppState) => {
 
 export const importAppData = (rawText: string): { ok: true; state: AppState } | { ok: false; error: string } => {
   const parsed = safeParseJson<unknown>(rawText);
-  if (!parsed) return { ok: false, error: "Invalid JSON content." };
+  if (!parsed) return { ok: false, error: "محتوى JSON غير صالح." };
 
   const candidate = (parsed as Record<string, unknown>).data ?? parsed;
   if (!isValidAppState(candidate)) {
-    return { ok: false, error: "Invalid app state structure." };
+    return { ok: false, error: "هيكل البيانات غير صالح." };
   }
 
   return { ok: true, state: candidate };

@@ -34,18 +34,18 @@ export function DataSafetyPanel({
 
   return (
     <section className="rounded-2xl border border-slate-700 bg-card p-4">
-      <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-300">Data Safety</h3>
+      <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-300">أمان البيانات</h3>
       <div className="flex flex-wrap gap-2">
         <button onClick={onExport} className="rounded-lg bg-cardSoft px-3 py-2 text-sm text-slate-200">
-          Export JSON
+          تصدير JSON
         </button>
         <label className="rounded-lg bg-cardSoft px-3 py-2 text-sm text-slate-200">
-          Import JSON
+          استيراد JSON
           <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={handleImport} />
         </label>
       </div>
       <div className="mt-4 rounded-lg bg-slate-900 p-3">
-        <p className="mb-2 text-xs text-slate-400">Type RESET to confirm safe reset</p>
+        <p className="mb-2 text-xs text-slate-400">اكتب RESET لتأكيد إعادة الضبط</p>
         <div className="flex flex-wrap gap-2">
           <input
             value={confirmText}
@@ -58,7 +58,7 @@ export function DataSafetyPanel({
             onClick={onReset}
             className="rounded-md bg-bad/20 px-3 py-1 text-sm text-bad disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Reset All Data
+            إعادة ضبط كل البيانات
           </button>
         </div>
       </div>
@@ -66,7 +66,7 @@ export function DataSafetyPanel({
         <div className="mt-3 flex items-center justify-between rounded-lg bg-bad/20 px-3 py-2 text-xs text-bad">
           <span>{error}</span>
           <button onClick={clearError} className="underline">
-            Dismiss
+            إغلاق
           </button>
         </div>
       )}

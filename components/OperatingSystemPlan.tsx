@@ -1,10 +1,10 @@
 "use client";
 
 import { SPRINTS } from "@/data/plan";
-import { useTranslations } from "next-intl";
+import { useArabicTranslations } from "@/lib/translations";
 
 export function OperatingSystemPlan() {
-  const t = useTranslations();
+  const t = useArabicTranslations();
 
   return (
     <section className="space-y-4 rounded-2xl border border-slate-700 bg-card p-4">

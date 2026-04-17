@@ -5,12 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0b1220",
-        card: "#111827",
-        cardSoft: "#1f2937",
-        ok: "#22c55e",
-        warn: "#facc15",
-        bad: "#ef4444"
+        bg: "#F6F4E8",
+        card: "#E5EEE4",
+        cardSoft: "#C0E1D2",
+        ok: "#C0E1D2",
+        warn: "#DC9B9B",
+        bad: "#DC9B9B"
       }
     }
   },

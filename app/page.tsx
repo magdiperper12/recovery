@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MOTIVATION_MESSAGES, SPRINTS, TASKS } from "@/data/plan";
 import { ChecklistSection } from "@/components/ChecklistSection";
 import { DataSafetyPanel } from "@/components/DataSafetyPanel";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { DailyPlanPopup } from "@/components/DailyPlanPopup";
 import { ProgressBar } from "@/components/ProgressBar";
 import { SprintGrid } from "@/components/SprintGrid";
 import { SubPagesNav } from "@/components/SubPagesNav";
 import { useStorage } from "@/hooks/useStorage";
 import { useUserSync } from "@/hooks/useUserSync";
-import { useLocale, useTranslations } from "next-intl";
 import {
   RECOVERY_DAYS,
+  PLAN_LENGTH_DAYS,
   computeDisciplineScore,
   computeProgress,
   getCurrentDayNumber,
@@ -25,6 +25,7 @@ import {
   shouldIncreaseStreak
 } from "@/lib/logic";
 import { hydrateAppState } from "@/lib/logic";
+import { useArabicTranslations } from "@/lib/translations";
 
 const groupedTasks = TASKS.reduce<Record<string, typeof TASKS>>((acc, task) => {
   if (!acc[task.category]) acc[task.category] = [];
@@ -33,8 +34,9 @@ const groupedTasks = TASKS.reduce<Record<string, typeof TASKS>>((acc, task) => {
 }, {});
 
 export default function Page() {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useArabicTranslations();
+  const [isPlanPopupOpen, setIsPlanPopupOpen] = useState(true);
+  const [selectedPreviewOffset, setSelectedPreviewOffset] = useState(0);
   const { state: data, setState: setData, ready: mounted, error, clearError, exportData, importData, resetData } = useStorage();
   const sync = useUserSync(data, mounted, (updater) => setData((prev) => updater(hydrateAppState(prev))));
 
@@ -79,21 +81,60 @@ export default function Page() {
 
   const formatter = useMemo(
     () =>
-      new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US", {
+      new Intl.NumberFormat("ar-EG", {
         maximumFractionDigits: 0
       }),
-    [locale]
+    []
   );
   const todayFormatted = useMemo(
     () =>
-      new Intl.DateTimeFormat(locale === "ar" ? "ar-EG" : "en-US", {
+      new Intl.DateTimeFormat("ar-EG", {
         weekday: "long",
         year: "numeric",
         month: "long",
         day: "numeric"
       }).format(new Date()),
-    [locale]
+    []
   );
+  const popupDateFormatter = useMemo(
+    () =>
+      new Intl.DateTimeFormat("ar-EG", {
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+      }),
+    []
+  );
+  const previewPlanItems = useMemo(
+    () =>
+      Array.from({ length: 5 }, (_, offset) => {
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + offset);
+        const dayNumber = Math.min(data.current.dayNumber + offset, PLAN_LENGTH_DAYS);
+        const phaseContextForDay = getPhaseContext(dayNumber);
+        return {
+          offset,
+          dateLabel: popupDateFormatter.format(targetDate),
+          sprintNumber: getSprintNumber(dayNumber),
+          sprintDayIndex: getSprintDayIndex(dayNumber),
+          phaseLength: getPhaseLength(dayNumber),
+          isRecovery: isRecoveryDay(dayNumber),
+          recoveryDayIndex: phaseContextForDay.recoveryDayIndex
+        };
+      }),
+    [data.current.dayNumber, popupDateFormatter]
+  );
+  const popupTaskLabels = useMemo(() => TASKS.map((task) => t(task.labelKey)), [t]);
+  const syncStatusLabel = useMemo(() => {
+    const labels: Record<string, string> = {
+      idle: "غير نشط",
+      syncing: "جاري المزامنة",
+      offline: "بدون اتصال",
+      error: "خطأ",
+      ready: "جاهز"
+    };
+    return labels[sync.status] ?? sync.status;
+  }, [sync.status]);
 
   const toggleTask = (taskId: string) => {
     setData((prev) => ({
@@ -114,14 +155,43 @@ export default function Page() {
 
   return (
     <main className="mx-auto min-h-screen max-w-6xl space-y-6 p-6">
+      <DailyPlanPopup
+        open={isPlanPopupOpen}
+        items={previewPlanItems}
+        selectedOffset={selectedPreviewOffset}
+        onSelectOffset={setSelectedPreviewOffset}
+        onClose={() => setIsPlanPopupOpen(false)}
+        title={t("popup.title")}
+        subtitle={t("popup.subtitle")}
+        closeLabel={t("popup.close")}
+        todayLabel={t("popup.today")}
+        tomorrowLabel={t("popup.tomorrow")}
+        futureDayLabel={(count) => t("popup.futureDay", { count })}
+        phaseLabel={({ sprint, sprintDay, phaseLength }) =>
+          t("stats.daySprint", { sprint, sprintDay, phaseLength })
+        }
+        recoveryLabel={({ recoveryDay, days }) => t("stats.recovery", { recoveryDay, days })}
+        tasksTitle={t("popup.tasksTitle")}
+        tasks={popupTaskLabels}
+        formatter={formatter}
+        recoveryDays={RECOVERY_DAYS}
+      />
       <header className="rounded-2xl border border-slate-700 bg-card p-5">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-2xl font-bold text-slate-100">{t("app.title")}</h1>
           <div className="flex items-center gap-2">
-            <span className="rounded-md bg-cardSoft px-2 py-1 text-xs text-slate-300">Sync: {sync.status}</span>
-            <LanguageSwitcher />
+            <button
+              onClick={() => {
+                setSelectedPreviewOffset(0);
+                setIsPlanPopupOpen(true);
+              }}
+              className="rounded-md bg-cardSoft px-2 py-1 text-xs text-slate-200"
+            >
+              {t("popup.open")}
+            </button>
+            <span className="rounded-md bg-cardSoft px-2 py-1 text-xs text-slate-300">المزامنة: {syncStatusLabel}</span>
             <button onClick={sync.signOut} className="rounded-md bg-cardSoft px-2 py-1 text-xs text-slate-200">
-              Logout
+              تسجيل الخروج
             </button>
           </div>
         </div>
@@ -277,9 +347,9 @@ export default function Page() {
           clearError={clearError}
         />
         <div className="rounded-2xl border border-slate-700 bg-card p-4 text-sm text-slate-300">
-          <p className="font-semibold text-slate-100">Cloud Sync</p>
-          <p className="mt-2">User: {sync.userId ?? "unknown"}</p>
-          <p className="mt-1">Status: {sync.status}</p>
+          <p className="font-semibold text-slate-100">المزامنة السحابية</p>
+          <p className="mt-2">المستخدم: {sync.userId ?? "غير معروف"}</p>
+          <p className="mt-1">الحالة: {syncStatusLabel}</p>
         </div>
       </section>
     </main>

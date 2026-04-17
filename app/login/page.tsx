@@ -30,7 +30,7 @@ export default function LoginPage() {
     try {
       const normalizedIdentifier = identifier.trim().toLowerCase();
       if (normalizedIdentifier !== ALLOWED_USERNAME || password !== ALLOWED_PASSWORD) {
-        setError("Invalid username or password.");
+        setError("اسم المستخدم أو كلمة المرور غير صحيحة.");
         return;
       }
 
@@ -76,7 +76,7 @@ export default function LoginPage() {
       router.replace("/");
       router.refresh();
     } catch {
-      setError("Login failed. Please check your credentials.");
+      setError("فشل تسجيل الدخول. تأكد من بياناتك.");
     } finally {
       setLoading(false);
     }
@@ -85,11 +85,11 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-bg p-4">
       <form onSubmit={onSubmit} className="w-full max-w-md space-y-4 rounded-2xl border border-slate-700 bg-card p-6">
-        <h1 className="text-2xl font-semibold text-slate-100">Sign in</h1>
-        <p className="text-sm text-slate-400">Use your username and password to access your dashboard.</p>
+        <h1 className="text-2xl font-semibold text-slate-100">تسجيل الدخول</h1>
+        <p className="text-sm text-slate-400">استخدم اسم المستخدم وكلمة المرور للوصول إلى لوحة التحكم.</p>
 
         <div className="space-y-2">
-          <label className="text-sm text-slate-300">Username</label>
+          <label className="text-sm text-slate-300">اسم المستخدم</label>
           <input
             type="text"
             value={identifier}
@@ -101,7 +101,7 @@ export default function LoginPage() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm text-slate-300">Password</label>
+          <label className="text-sm text-slate-300">كلمة المرور</label>
           <input
             type="password"
             value={password}
@@ -114,13 +114,13 @@ export default function LoginPage() {
 
         <label className="flex items-center gap-2 text-sm text-slate-300">
           <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-          Remember me
+          تذكرني
         </label>
 
         {error && <div className="rounded-lg bg-bad/20 px-3 py-2 text-sm text-bad">{error}</div>}
         {!hasSupabaseConfig && (
           <div className="rounded-lg bg-warn/20 px-3 py-2 text-sm text-warn">
-            Supabase is not configured. Running in local auth mode.
+            إعدادات Supabase غير موجودة. يعمل النظام بوضع تسجيل محلي.
           </div>
         )}
 
@@ -129,7 +129,7 @@ export default function LoginPage() {
           disabled={!canSubmit}
           className="w-full rounded-lg bg-ok/20 px-4 py-2 text-sm font-medium text-ok disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? "Signing in..." : "Sign in"}
+          {loading ? "جاري تسجيل الدخول..." : "دخول"}
         </button>
       </form>
     </main>

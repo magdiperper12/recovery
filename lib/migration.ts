@@ -1,7 +1,7 @@
 import { AppState, VersionedStorage } from "@/lib/types";
 import { SYSTEM_START_DATE, createInitialState, hydrateAppState } from "@/lib/logic";
 
-export const STORAGE_VERSION = 1;
+export const STORAGE_VERSION = 2;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;

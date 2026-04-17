@@ -7,7 +7,6 @@ Production-ready Next.js mini app for daily execution, discipline tracking, and 
 - Next.js (App Router)
 - TypeScript
 - Tailwind CSS
-- next-intl
 - Local storage persistence
 
 ## Run
@@ -22,8 +21,8 @@ Open `http://localhost:3000`.
 ## Core Features
 
 - 16-task daily checklist grouped by routine blocks
-- Arabic/English language switcher (cookie persisted)
-- Full RTL/LTR document direction switching
+- Arabic-only interface
+- Fixed RTL document direction
 - Progress percentage and colored status cues
 - Daily reset when date changes
 - Streak logic (`>=80%` completion and no relapse)
@@ -38,18 +37,16 @@ Open `http://localhost:3000`.
 ## Project Structure
 
 - `app/page.tsx`: Main dashboard, tracker state, and rendering
-- `app/layout.tsx`: Root layout, locale provider, `lang`/`dir` handling
+- `app/layout.tsx`: Root layout with fixed Arabic `lang`/`dir`
 - `app/globals.css`: Global styles + Tailwind directives
 - `components/ChecklistSection.tsx`: Reusable checklist card
 - `components/ProgressBar.tsx`: Progress component
 - `components/SprintGrid.tsx`: Day 1-15 sprint board
 - `components/OperatingSystemPlan.tsx`: 8-sprint transformation view
-- `components/LanguageSwitcher.tsx`: Arabic/English toggle
 - `data/plan.ts`: Example tasks, sprint definitions, motivational data
-- `i18n/request.ts`: next-intl request config + message loading
 - `lib/logic.ts`: Progress, scoring, streak, cycle and reset logic
 - `lib/types.ts`: Shared TypeScript models
-- `lib/i18n.ts`: Locale and direction helpers
+- `lib/translations.ts`: Arabic text lookup and interpolation helper
 - `lib/storage.ts`: Versioned local storage read/write/import/reset
 - `lib/migration.ts`: Storage schema migration and validation guards
 - `lib/backup.ts`: Export/import helpers and last valid snapshot
@@ -57,7 +54,6 @@ Open `http://localhost:3000`.
 - `hooks/useStorage.ts`: Safe storage hook for state lifecycle
 - `hooks/useSync.ts`: Debounced cloud sync + offline queue
 - `supabase/schema.sql`: SQL schema and RLS policies
-- `locales/en/common.json`: English translations
 - `locales/ar/common.json`: Arabic translations
 
 ## Data Safety (Phase 1)

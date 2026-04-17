@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useArabicTranslations } from "@/lib/translations";
 
 interface PhasePageContentProps {
   phase: number;
@@ -19,7 +19,7 @@ const checklistKeys = [
 ];
 
 export function PhasePageContent({ phase }: PhasePageContentProps) {
-  const t = useTranslations();
+  const t = useArabicTranslations();
   const phaseKey = `sprints.${phase}`;
 
   return (

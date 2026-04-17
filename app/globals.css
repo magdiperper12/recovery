@@ -4,9 +4,9 @@
 
 html,
 body {
-  background: #0b1220;
-  color: #e2e8f0;
-  font-family: var(--font-latin), system-ui, sans-serif;
+  background: #f6f4e8;
+  color: #080616;
+  font-family: var(--font-arabic), system-ui, sans-serif;
   line-height: 1.65;
 }
 
@@ -16,4 +16,55 @@ html[dir="rtl"] body {
 
 * {
   box-sizing: border-box;
+}
+
+@layer utilities {
+  .bg-slate-950\/70 {
+    background-color: rgb(220 155 155 / 0.45) !important;
+  }
+
+  .bg-slate-950,
+  .bg-slate-900,
+  .bg-slate-800,
+  .bg-slate-700 {
+    background-color: #f6f4e8 !important;
+  }
+
+  .border-slate-800,
+  .border-slate-700,
+  .border-slate-600 {
+    border-color: #c0e1d2 !important;
+  }
+
+.text-slate-100 {
+    color: #080616 !important;
+  }
+
+  .text-slate-200 {
+    color: #1a1953 !important;
+  }
+
+  .text-slate-300 {
+    color: #162e93 !important;
+  }
+
+  .text-slate-400 {
+    color: #162e93 !important;
+  }
+
+  .text-ok {
+    color: #162e93 !important;
+  }
+
+  .text-warn {
+    color: #1a1953 !important;
+  }
+
+  .text-bad {
+    color: #080616 !important;
+  }
+
+  .hover\:bg-slate-700:hover {
+    background-color: #e5eee4 !important;
+  }
 }

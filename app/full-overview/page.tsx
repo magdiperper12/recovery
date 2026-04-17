@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
   GOAL_IDS,
@@ -12,6 +11,7 @@ import {
 } from "@/lib/logic";
 import { DayState, GoalProgressHistory } from "@/lib/types";
 import { readVersionedStorage, writeVersionedStorage } from "@/lib/storage";
+import { useArabicTranslations } from "@/lib/translations";
 
 interface PersistedData {
   streak: number;
@@ -21,9 +21,8 @@ interface PersistedData {
 }
 
 export default function FullOverviewPage() {
-  const locale = useLocale();
-  const t = useTranslations();
-  const numberFormatter = new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US");
+  const t = useArabicTranslations();
+  const numberFormatter = new Intl.NumberFormat("ar-EG");
   const [goalHistory, setGoalHistory] = useState<GoalProgressHistory>({});
   const goals = GOAL_IDS;
 

@@ -8,12 +8,12 @@ import {
   PhaseProgressHistory
 } from "@/lib/types";
 
-export const STORAGE_KEY = "daily-checklist-system-v1";
+export const STORAGE_KEY = "daily-checklist-system-v2";
 export const PLAN_LENGTH_DAYS = 120;
-export const PHASE_LENGTHS = [15, 15, 15, 15, 15, 15, 12] as const;
-export const RECOVERY_DAYS = 3;
-export const TRACKING_START_DATE_KEY = "2026-03-27";
-export const SYSTEM_START_DATE = new Date("2026-03-27T00:00:00");
+export const PHASE_LENGTHS = [15, 15, 15, 15, 15, 15, 15, 15] as const;
+export const RECOVERY_DAYS = 0;
+export const TRACKING_START_DATE_KEY = "2026-04-18";
+export const SYSTEM_START_DATE = new Date("2026-04-18T00:00:00");
 export const GOAL_IDS: GoalId[] = [
   "income",
   "weight",
@@ -109,8 +109,9 @@ export const getPhaseLength = (dayNumber: number) => getPhaseContext(dayNumber).
 export const isRecoveryDay = (dayNumber: number) => getPhaseContext(dayNumber).isRecovery;
 
 export const computeProgress = (checks: Record<string, boolean>) => {
-  const completed = Object.values(checks).filter(Boolean).length;
-  const total = Object.keys(checks).length;
+  const activeTaskIds = TASKS.map((task) => task.id);
+  const completed = activeTaskIds.reduce((sum, id) => sum + (checks[id] ? 1 : 0), 0);
+  const total = activeTaskIds.length;
   const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
   return { completed, total, percent };
 };
@@ -121,7 +122,7 @@ export const computeDisciplineScore = (
   badDay: boolean
 ) => {
   const { percent } = computeProgress(checks);
-  const disciplineTasks = ["no_porn", "no_masturbation", "social_limit"];
+  const disciplineTasks = ["no_porn"];
   const disciplineHits = disciplineTasks.reduce(
     (sum, id) => sum + (checks[id] ? 1 : 0),
     0
@@ -148,43 +149,43 @@ const goalProgressChecks = (goalId: GoalId, day: DayState): Record<string, boole
     case "income":
       return {
         jobs: Boolean(c.jobs),
-        freelance: Boolean(c.freelance),
-        focus: Boolean(c.focus),
-        track: Boolean(c.track)
+        work: Boolean(c.work),
+        backendStudy: Boolean(c.backend_2h),
+        frontendStudy: Boolean(c.frontend_1h)
       };
     case "weight":
       return {
         gym: Boolean(c.gym),
-        breakfast: Boolean(c.breakfast),
+        wakeEarly: Boolean(c.wake_6),
         sleep: Boolean(c.sleep_1130),
         reflect: Boolean(c.reflect)
       };
     case "quitAddiction":
       return {
         noPorn: Boolean(c.no_porn),
-        noMasturbation: Boolean(c.no_masturbation),
-        socialLimit: Boolean(c.social_limit),
+        sleep: Boolean(c.sleep_1130),
+        reflection: Boolean(c.reflect),
         noRelapse: !day.relapse
       };
     case "varicocele":
       return {
         reflect: Boolean(c.reflect),
-        track: Boolean(c.track),
+        wakeEarly: Boolean(c.wake_6),
         sleep: Boolean(c.sleep_1130),
         notes: hasNotes
       };
     case "backend":
       return {
         backendStudy: Boolean(c.backend_2h),
-        focus: Boolean(c.focus),
-        track: Boolean(c.track),
-        noDistraction: Boolean(c.work)
+        work: Boolean(c.work),
+        jobs: Boolean(c.jobs),
+        reflection: Boolean(c.reflect)
       };
     case "frontendSenior":
       return {
         frontendStudy: Boolean(c.frontend_1h),
-        focus: Boolean(c.focus),
-        track: Boolean(c.track),
+        work: Boolean(c.work),
+        jobs: Boolean(c.jobs),
         reflection: Boolean(c.reflect)
       };
     default:

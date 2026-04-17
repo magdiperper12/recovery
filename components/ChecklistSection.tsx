@@ -30,7 +30,7 @@ export function ChecklistSection({
               key={task.id}
               onClick={() => onToggle(task.id)}
               className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-start text-sm transition ${
-                done ? "bg-green-950/40 text-green-200" : "bg-cardSoft text-slate-200 hover:bg-slate-700"
+                done ? "bg-ok/40 text-slate-100" : "bg-cardSoft text-slate-200 hover:bg-slate-700"
               }`}
             >
               <span>{task.label}</span>
